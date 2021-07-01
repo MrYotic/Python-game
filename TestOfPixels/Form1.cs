@@ -10,7 +10,6 @@ namespace TestOfPixels
 {
     public partial class Form1 : Form
     {
-        #region Form Move
         public void Controls_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button.Equals(MouseButtons.Left))
@@ -20,12 +19,8 @@ namespace TestOfPixels
                 WndProc(ref m);
             }
         }
-        #endregion
-        #region DllImport
         [DllImport("User32.dll")] private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
         [DllImport("User32.dll")] private static extern short GetAsyncKeyState(System.Int32 vKey);
-        #endregion
-        #region Misk
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +29,7 @@ namespace TestOfPixels
         internal List<int[]> snake = new List<int[]>();
         internal void DrawedPixel(int x, int y, bool state)
         {
-            if (x > 20 || y > 20 || x < 0 || y < 0)
+            if (x > 19 || y > 19 || x < 0 || y < 0)
                 Process.GetCurrentProcess().Kill();
             Bitmap bitmap = (Bitmap)_pictureBoxes[x, y].Image;
             Color color = Color.LightGreen;
@@ -114,7 +109,6 @@ namespace TestOfPixels
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        #endregion
         private void Form1_Load(object sender, EventArgs e)
         {
             CreatePictureBox();
@@ -140,16 +134,15 @@ namespace TestOfPixels
             _pictureBoxes[apple[0], apple[1]].Image = bitmap;
         }
         internal string direction = "up";
-        internal List<int[]> snake2 = new List<int[]>();
         private void timer1_Tick(object sender, EventArgs e)
         {
+            List<int[]> snake2 = new List<int[]>();
             switch (direction)
             {
                 case ("up"):
                     for (int i = 0; i < snake.Count; i++)
                         if (snake[0][0] == snake[i][0] && snake[0][1] - 1 == snake[i][1])
                             Process.GetCurrentProcess().Kill();
-                    snake2 = new List<int[]>();
                     DrawedPixel((snake[0][0]), (snake[0][1] - 1), true);
                     snake2.Add(new int[] { (snake[0][0]), (snake[0][1] - 1) });
                     snake2.AddRange(snake);
@@ -167,7 +160,6 @@ namespace TestOfPixels
                     for (int i = 0; i < snake.Count; i++)
                         if (snake[0][0] - 1 == snake[i][0] && snake[0][1] == snake[i][1])
                             Process.GetCurrentProcess().Kill();
-                    snake2 = new List<int[]>();
                     DrawedPixel((snake[0][0] - 1), (snake[0][1]), true);
                     snake2.Add(new int[] { (snake[0][0] - 1), (snake[0][1]) });
                     snake2.AddRange(snake);
@@ -185,7 +177,6 @@ namespace TestOfPixels
                     for (int i = 0; i < snake.Count; i++)
                         if (snake[0][0] + 1 == snake[i][0] && snake[0][1] == snake[i][1])
                             Process.GetCurrentProcess().Kill();
-                    snake2 = new List<int[]>();
                     DrawedPixel((snake[0][0] + 1), (snake[0][1]), true);
                     snake2.Add(new int[] { (snake[0][0] + 1), (snake[0][1]) });
                     snake2.AddRange(snake);
@@ -203,7 +194,6 @@ namespace TestOfPixels
                     for (int i = 0; i < snake.Count; i++)
                         if (snake[0][0]  == snake[i][0] && snake[0][1] + 1 == snake[i][1])
                             Process.GetCurrentProcess().Kill();
-                    snake2 = new List<int[]>();
                     DrawedPixel((snake[0][0]), (snake[0][1] + 1), true);
                     snake2.Add(new int[] { (snake[0][0]), (snake[0][1] + 1) });
                     snake2.AddRange(snake);
