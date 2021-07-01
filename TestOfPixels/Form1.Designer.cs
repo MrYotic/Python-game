@@ -1,4 +1,7 @@
-﻿namespace TestOfPixels
+﻿using System;
+using System.Windows.Forms;
+
+namespace TestOfPixels
 {
     partial class Form1
     {
@@ -26,6 +29,16 @@
         /// Требуемый метод для поддержки конструктора — не изменяйте 
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
+        /// 
+        public void Controls_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button.Equals(MouseButtons.Left))
+            {
+                ((Control)sender).Capture = false;
+                var m = Message.Create(Handle, 0xa1, new IntPtr(0x2), IntPtr.Zero);
+                WndProc(ref m);
+            }
+        }
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();

@@ -10,15 +10,6 @@ namespace TestOfPixels
 {
     public partial class Form1 : Form
     {
-        public void Controls_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button.Equals(MouseButtons.Left))
-            {
-                ((Control)sender).Capture = false;
-                var m = Message.Create(Handle, 0xa1, new IntPtr(0x2), IntPtr.Zero);
-                WndProc(ref m);
-            }
-        }
         [DllImport("User32.dll")] private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
         [DllImport("User32.dll")] private static extern short GetAsyncKeyState(System.Int32 vKey);
         public Form1()
@@ -28,7 +19,7 @@ namespace TestOfPixels
         }
         internal List<int[]> snake = new List<int[]>();
         internal void DrawedPixel(int x, int y, bool state)
-        {
+        { 
             if (x > 19 || y > 19 || x < 0 || y < 0)
                 Process.GetCurrentProcess().Kill();
             Bitmap bitmap = (Bitmap)_pictureBoxes[x, y].Image;
@@ -40,6 +31,7 @@ namespace TestOfPixels
                     bitmap.SetPixel(i, o, color);
             _pictureBoxes[x, y].Image = bitmap;
         }
+
         internal PictureBox[,] _pictureBoxes = new PictureBox[20, 20];
         internal void CreatePictureBox()
         {
@@ -127,6 +119,12 @@ namespace TestOfPixels
         internal void CreateApple()
         {
             apple = new int[2] { rnd.Next(0, 19), rnd.Next(0, 19) };
+            for (int i = 0; i < snake.Count; i++)
+                if (snake[i][0] == apple[0] && snake[i][1] == apple[1])
+                {
+                    CreateApple();
+                    return;
+                }
             Bitmap bitmap = (Bitmap)_pictureBoxes[apple[0], apple[1]].Image;
             for (int i = 0; i < 15; i++)
                 for (int o = 0; o < 15; o++)
