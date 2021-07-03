@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TestOfPixels
@@ -39,6 +41,12 @@ namespace TestOfPixels
                 WndProc(ref m);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
+        }
+
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -70,6 +78,7 @@ namespace TestOfPixels
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
@@ -96,10 +105,32 @@ namespace TestOfPixels
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            //
+            //_pictureBoxes
+            //
+            for (int i = 0; i < 20; i++)
+                for (int o = 0; o < 20; o++)
+                {
+                    _pictureBoxes[i, o] = new PictureBox();
+                    _pictureBoxes[i, o].Size = new Size(25, 25);
+                    _pictureBoxes[i, o].Location = new Point(i * 25, o * 25);
+                    Bitmap tempBitmap = new Bitmap(25, 25);
+                    for (int x = 0; x < 25; x++)
+                        for (int y = 0; y < 25; y++)
+                            tempBitmap.SetPixel(x, y, Color.LightGreen);
+                    for (int p = 0; p < 2; p++)
+                    {
+                        for (int ii = 0; ii < 25; ii++)
+                        {
+                            tempBitmap.SetPixel(p * 24, ii, Color.Green);
+                            tempBitmap.SetPixel(ii, p * 24, Color.Green);
+                        }
+                    }
+                    _pictureBoxes[i, o].Image = tempBitmap;
+                    panel1.Controls.Add(_pictureBoxes[i, o]);
+                }
         }
 
         #endregion
@@ -107,6 +138,7 @@ namespace TestOfPixels
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
+        private PictureBox[,] _pictureBoxes = new PictureBox[20, 20];
     }
 }
 
