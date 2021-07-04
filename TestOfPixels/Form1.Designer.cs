@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TestOfPixels
+namespace a
 {
-    partial class Form1
+    partial class aa
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -47,7 +47,7 @@ namespace TestOfPixels
             Process.GetCurrentProcess().Kill();
         }
 
-        private void InitializeComponent()
+        private void a111()
         {
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
@@ -80,7 +80,7 @@ namespace TestOfPixels
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 200;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.a11a);
             // 
             // label1
             // 
@@ -113,9 +113,9 @@ namespace TestOfPixels
             for (int i = 0; i < 20; i++)
                 for (int o = 0; o < 20; o++)
                 {
-                    _pictureBoxes[i, o] = new PictureBox();
-                    _pictureBoxes[i, o].Size = new Size(25, 25);
-                    _pictureBoxes[i, o].Location = new Point(i * 25, o * 25);
+                    a11[i, o] = new PictureBox();
+                    a11[i, o].Size = new Size(25, 25);
+                    a11[i, o].Location = new Point(i * 25, o * 25);
                     Bitmap tempBitmap = new Bitmap(25, 25);
                     for (int x = 0; x < 25; x++)
                         for (int y = 0; y < 25; y++)
@@ -128,8 +128,8 @@ namespace TestOfPixels
                             tempBitmap.SetPixel(ii, p * 24, Color.Green);
                         }
                     }
-                    _pictureBoxes[i, o].Image = tempBitmap;
-                    panel1.Controls.Add(_pictureBoxes[i, o]);
+                    a11[i, o].Image = tempBitmap;
+                    panel1.Controls.Add(a11[i, o]);
                 }
         }
 
@@ -138,7 +138,7 @@ namespace TestOfPixels
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
-        private PictureBox[,] _pictureBoxes = new PictureBox[20, 20];
+        private PictureBox[,] a11 = new PictureBox[20, 20];
     }
 }
 
