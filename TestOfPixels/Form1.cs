@@ -7,9 +7,7 @@
         internal System.Collections.Generic.List<int[]> aa1 = new System.Collections.Generic.List<int[]>() { new int[] { 10, 10 } };
         internal void a1(int x, int y, bool aaaa){ 
             System.Drawing.Bitmap a1a = (System.Drawing.Bitmap)a11[x, y].Image;
-            System.Drawing.Color aa1 = System.Drawing.Color.LightGreen;
-            if (aaaa == true)
-                aa1 = System.Drawing.Color.DarkGreen;
+            System.Drawing.Color aa1 = aaaa == true ? System.Drawing.Color.DarkGreen : System.Drawing.Color.LightGreen;
             for (int i = 1; i < 24 * 24; i++)
                   a1a.SetPixel(i / 24, i % 24, aa1);
             a11[x, y].Image = a1a;}
