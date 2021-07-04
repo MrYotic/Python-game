@@ -6,7 +6,6 @@
             aaa(new System.Random(), new System.Random());}
         internal System.Collections.Generic.List<int[]> aa1 = new System.Collections.Generic.List<int[]>() { new int[] { 10, 10 } };
         internal void a1(int x, int y, bool aaaa){ 
-            if (x > 19 || y > 19 || x < 0 || y < 0) System.Diagnostics.Process.GetCurrentProcess().Kill();
             System.Drawing.Bitmap a1a = (System.Drawing.Bitmap)a11[x, y].Image;
             System.Drawing.Color aa1 = System.Drawing.Color.LightGreen;
             if (aaaa == true)
